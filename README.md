@@ -7,7 +7,7 @@ This application is suitable for anyone who needs an extra push to wake up in th
 ## Why is this project of interest to you?
 I am always late to my classes because I tend to turn off my alarm and fall back asleep. This project interests me because now I can use an alarm clock that requires me to stimulate my brain and wake up for my classes.
 
-## USER STORIES
+## User Stories
 
 As a user, I want to add the specific time and ringtone to my alarm clock
 
