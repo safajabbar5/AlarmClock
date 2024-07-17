@@ -7,15 +7,16 @@ import java.time.LocalDateTime;
 
 
 
-// EFFECTS: A class representing an alarm clock that shows the list of confirmed alarms  
+    // A class representing an alarm clock that shows the list of confirmed alarms, and compares alarm with local time  
 public class Alarmclock {
     private Alarm alarm;
     private List<Alarm> alarms;
     private LocalDateTime currentLocalhour;
     private LocalDateTime currentLocalmin;
     
-// MODIFIES: this
-// EFFECTS: Sets the list of alarms,starts with an empty string
+    
+    // EFFECTS: Sets the list of alarms, starts with an empty list of alarm
+    // MODIFIES: this
     public Alarmclock() {
         this.alarms = new ArrayList<>();
         this.alarm = null;
@@ -24,37 +25,35 @@ public class Alarmclock {
        
     }
 
-// MODIFIES: this
+    
     // EFFECTS: set the current alarm to the provided alarm
-
+    // MODIFIES: this
     public void setCurrentAlarm(Alarm alarm) {
         this.alarm = alarm;
     }
 
-// // MODIFIES: this
-// // EFFECTS: add a new alarm to the list
+    
+    // EFFECTS: add a new alarm to the list of alarms
+    // MODIFIES: this
     public void addAlarm(Alarm alarm) {
         alarms.add(alarm);
         }
 
 
-
-
-// MODIFIES: this
-// EFFECTS: if there is an alarm set then alarm should start playing 
-public Boolean alarmIsPlaying(Alarm alarm) {
+    // EFFECTS: if there is an alarm set is the same time as the local time, then alarm should ring
+    // MODIFIES: this
+    public Boolean alarmIsPlaying(Alarm alarm) {
     if (alarm.getHours() == currentLocalhour.getHour() && alarm.getMinutes() ==  currentLocalmin.getMinute()); {
     return true;
 } 
 }
 
-// MODIFIES: this
     // EFFECTS: returns the current alarm that is set 
     public Alarm getRecentAlarm() {
         return alarm;
     }
 
-
+    // EFFECTS: returns the current alarm list that is set 
      public List<Alarm> getAlarms() {
          return alarms;
      }

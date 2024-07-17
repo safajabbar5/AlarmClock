@@ -9,11 +9,11 @@ I am always late to my classes because I tend to turn off my alarm and fall back
 
 ## User Stories
 
-As a user, I want to add the specific time and ringtone to my alarm clock
+As a user, I want to add the specific time to my alarm clock
 
-As a user, I want to view a list of all of the times specified for my alarm
+As a user, I want to view of the times I selected for my alarm
 
 As a user, I must solve the riddle to turn off my alarm. 
 
-As a user, I want different riddles for each day of the week, with riddles alternating weekly.
+As a user, I want a different riddles for each time I set an alarm, in a week.
   

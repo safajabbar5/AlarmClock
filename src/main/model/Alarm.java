@@ -29,15 +29,17 @@ public class Alarm {
             } 
         }
 
-
+    // EFFECTS: return the set alarm
     public int getAlarm() {
     return alarm;
     }
 
+    // EFFECTS: return the set hour of the alarm
     public int getHours() {
         return hrs;
         }
-
+    
+    // EFFECTS: return the mintues of the alarm
     public int getMinutes() {
         return min;
         }
