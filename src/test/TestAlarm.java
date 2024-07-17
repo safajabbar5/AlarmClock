@@ -33,6 +33,12 @@ public void testsetHour() {
     assertEquals(12, testAlarm1.getHours());
     testAlarm1.setHour(23);
     assertEquals(23,testAlarm1.getHours());
+    testAlarm1.setHour(0);
+    assertEquals(0,testAlarm1.getHours());
+    testAlarm2.setHour(-10);
+    testAlarm2.setHour(10);
+    assertEquals(10,testAlarm2.getHours());
+    
 }
 
 
@@ -43,7 +49,12 @@ public void testsetMinutes() {
     testAlarm1.setMinutes(40);
     assertEquals(40,testAlarm1.getMinutes());
     testAlarm2.setMinutes(0);
+    assertEquals(0,testAlarm2.getMinutes());
     testAlarm2.setMinutes(1);
+    assertEquals(1,testAlarm2.getMinutes());
+    testAlarm2.setMinutes(70);
+    assertEquals(1,testAlarm2.getMinutes());
+    testAlarm2.setMinutes(-10);
     assertEquals(1,testAlarm2.getMinutes());
 }
 

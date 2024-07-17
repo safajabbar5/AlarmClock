@@ -18,19 +18,15 @@ public class Alarm {
     public void setHour(Integer hour) {
         if (23 >= hour && 0 <= hour) {
         this.hrs = hour;
-        } else {
-            System.out.println("Hour must be between 0 to 23 when setting up your alarm");;
-        }
+        } 
     }
 
     // EFFECTS: sets the alarm to the provided mintues
     // MODIFIES: this  
     public void setMinutes(Integer minutes) {
-        if (59 >= minutes && 0 < minutes) {
+        if (59 >= minutes && 0 <= minutes) {
             this.min = minutes;
-            } else {
-                System.out.println("Mintues must be between 1 to 59 when setting up your alarm");;
-            }
+            } 
         }
 
 

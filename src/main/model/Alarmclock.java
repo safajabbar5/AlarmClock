@@ -1,6 +1,7 @@
 package model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
 
@@ -16,7 +17,7 @@ public class Alarmclock {
 // MODIFIES: this
 // EFFECTS: Sets the list of alarms,starts with an empty string
     public Alarmclock() {
-        // alarms.isEmpty();
+        this.alarms = new ArrayList<>();
         this.alarm = null;
         this.currentLocalhour = LocalDateTime.now();
         this.currentLocalmin = LocalDateTime.now();
@@ -30,14 +31,12 @@ public class Alarmclock {
         this.alarm = alarm;
     }
 
-// MODIFIES: this
-// EFFECTS: add a new alarm to the list
+// // MODIFIES: this
+// // EFFECTS: add a new alarm to the list
     public void addAlarm(Alarm alarm) {
-        if (!alarms.contains(alarm)) {
-            alarms.add(alarm);
+        alarms.add(alarm);
         }
-        System.out.println("You have added the same Alarm time again");
-    }
+
 
 
 
@@ -52,20 +51,11 @@ public Boolean alarmIsPlaying(Alarm alarm) {
 // MODIFIES: this
     // EFFECTS: returns the current alarm that is set 
     public Alarm getRecentAlarm() {
-        System.out.println("Your alarm has been set to");
         return alarm;
     }
 
-    public LocalDateTime getLocalHourTime() {
-        return currentLocalhour;
-    }
-
-    public LocalDateTime getLocalHourMinTime() {
-        return currentLocalmin;
-    }
 
      public List<Alarm> getAlarms() {
-        System.out.println("Confirmed alarms for the day are");
          return alarms;
      }
 

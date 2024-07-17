@@ -37,6 +37,8 @@ public class TestAlarmclock {
     @Test
     void testConstructor() {
         assertNull(testAlarmClock.getRecentAlarm());
+        
+    
     }
 
     @Test
@@ -50,22 +52,14 @@ public class TestAlarmclock {
 
     @Test
     void testaddAlarm() {
-        // testAlarmClock.addAlarm(testa1);
-        // testAlarmClock.addAlarm(testa2);
-        // alarmList = testAlarmClock.getAlarms();
-        assertEquals(0, alarmList.size());
-        alarmList.add(testa1);
+         testAlarmClock.addAlarm(testa1);
+         testAlarmClock.addAlarm(testa2);
+         alarmList = testAlarmClock.getAlarms();
+        assertEquals(2, alarmList.size());
         assertEquals(testa1, alarmList.get(0));
-
-        // testAlarmClock.addAlarm(testa1);
-        // assertEquals(2,alarmList.size());
+        assertEquals(testa2, alarmList.get(1));
 
 
-        //assertEquals(testa1, alarmList.get(0));
-        //assertEquals(2,alarmList.size());
-
-        //testAlarmClock.addAlarm(testa1);
-        //assertEquals(2,alarmList.size());
     }
     
     @Test
@@ -75,6 +69,9 @@ public class TestAlarmclock {
         assertTrue(testAlarmClock.alarmIsPlaying(currenttime));
         
     }
+
+  
+
     
 }
 
