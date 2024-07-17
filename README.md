@@ -9,9 +9,9 @@ I am always late to my classes because I tend to turn off my alarm and fall back
 
 ## User Stories
 
-As a user, I want to add the specific time to my alarm clock
+As a user, I want to add the specific time to my alarm clock.
 
-As a user, I want to view of the times I selected for my alarm
+As a user, I want to view the time I selected for my alarm.
 
 As a user, I must solve the riddle to turn off my alarm. 
 
