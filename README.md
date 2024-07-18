@@ -11,7 +11,7 @@ I am always late to my classes because I tend to turn off my alarm and fall back
 
 As a user, I want to add alarm times to my alarm clock.
 
-As a user, I want to view all the alarm times set up for the alarm clock.
+As a user, I want to view the alarm times set up for the alarm clock.
 
 As a user, I must solve the riddle to turn off my alarm. 
 
