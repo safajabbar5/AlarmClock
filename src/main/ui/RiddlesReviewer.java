@@ -3,6 +3,8 @@ package ui;
 import model.Riddle;
 import model.Alarmclock;
 import model.Alarm;
+
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,8 +30,9 @@ public class RiddlesReviewer {
         printSnoozes();
         System.out.println("Welcome to the AlarmClock app - the perfect way to say goodbye to your sleep!!");
 
+        handleMenu();
+        
         while (this.isAlarmRunning) {
-            handleMenu();
             checkAndHandleAlarm();
         }
     }
@@ -82,9 +85,13 @@ public class RiddlesReviewer {
         printSnoozes();
     }
 
+
+
     // EFFECTS: sets the alarm time based on the user input
     private void setAlarmTime() {
-        {
+        boolean setMoreAlarms = true;
+        
+        while (setMoreAlarms) {
             System.out.println("Enter the time (hour) for your alarm, please choose between (0-23)");
             int hour = Integer.parseInt(scanner.nextLine());
             System.out.println("Enter the time (minutes) for your alarm, please choose between (0-59)");
@@ -93,31 +100,67 @@ public class RiddlesReviewer {
             currentalarm = new Alarm(hour, min);
             alarmClock.setCurrentAlarm(currentalarm);
             alarmClock.addAlarm(currentalarm);
-            System.out.println("Confirming that Alarm is set for " + hour + " : " + min);
+            System.out.println("Setting alarm for " + hour + " : " + min);
+            printSnoozes();
+
+            System.out.println("Do you want to set another alarm? (yes/no)");
+            String userRes = scanner.nextLine();
+                if (userRes.equals("no")) {
+                    setMoreAlarms = false;
+                }
+                checkAndHandleAlarm();
+            }
+            getAlarms();
+            System.out.println("Good Night!! :)");
+            
+            
         }
+         
+    
+
+    private void getAlarms() {
+        List<Alarm> alarms = alarmClock.getAlarms();
+        printSnoozes();
+        System.out.println("Here are your current set of alarms");
+        for(Alarm alarm : alarms) {
+            System.out.println(alarm.getHours() + ":" + alarm.getMinutes());
+        }
+
     }
+    
 
     // EFFECTS: checks if the alarm set is the same as the local time, 
     //          if it is the same then play the alarm, and display a riddle for the user to solve.
     //          If the user solves the riddle then stop the alarm, if not then keep playing the alarm.
     private void checkAndHandleAlarm() {
-        if (currentalarm != null && alarmClock.alarmIsPlaying(currentalarm)) {
-            System.out.println("Alarm is ringing! Solve this riddle to stop the alarm");
+        LocalTime now = LocalTime.now();
+        List<Alarm> alarms = alarmClock.getAlarms();
+        
+        
+        for (Alarm alarm : alarms) {
+            if (alarm.getHours() == now.getHour() && alarm.getMinutes() == now.getMinute()) {
+            System.out.println("Good Morning!");
+            System.out.println("ALARM IS RINGING!");
+            System.out.println("ALARM IS RINGING!");
+            System.out.println("Solve this riddle to stop the alarm\"");
+            printSnoozes();
             Riddle riddle = getRandomRiddle();
             boolean correctAnswer = false;
-
+        
             while (!correctAnswer) {
                 System.out.println(riddle.getQuestion());
                 String answer = scanner.nextLine();
                 if (riddle.checkRiddleAnswer(answer)) {
                     System.out.println("Correct! Alarm stopped.");
                     correctAnswer = true;
-                    isAlarmRunning = false;
+                    alarms.remove(alarm);
+                    break;
                 } else {
-                    System.out.println("Incorrect! Try again.");
+                        System.out.println("Incorrect! Try again.");
+                    }
                 }
             }
-        }
+        } 
     }
 
     // EFFECTS: randomly get a riddle from the readyriddle list of riddles above
@@ -128,6 +171,8 @@ public class RiddlesReviewer {
         return riddles.get(index);
 
     }
+
+    
 
     // EFFECTS: prints out a line of snoozes to act as a divider
     private void printSnoozes() {

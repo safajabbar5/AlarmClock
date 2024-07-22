@@ -23,6 +23,7 @@ public class TestAlarm {
         assertEquals(30,testAlarm1.getMinutes());
         assertEquals(1,testAlarm2.getHours());
         assertEquals(25, testAlarm2.getMinutes());
+        assertEquals(0, testAlarm1.getAlarm());
 }
 
 @Test

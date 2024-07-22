@@ -3,7 +3,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 
 
@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 public class Alarmclock {
     private Alarm alarm;
     private List<Alarm> alarms;
-    private LocalDateTime currentLocalhour;
-    private LocalDateTime currentLocalmin;
+    private LocalTime currentLocalhour;
+    private LocalTime currentLocalmin;
     
     
     // EFFECTS: Sets the list of alarms, starts with an empty list of alarm
@@ -20,8 +20,8 @@ public class Alarmclock {
     public Alarmclock() {
         this.alarms = new ArrayList<>();
         this.alarm = null;
-        this.currentLocalhour = LocalDateTime.now();
-        this.currentLocalmin = LocalDateTime.now();
+        this.currentLocalhour = LocalTime.now();
+        this.currentLocalmin = LocalTime.now();
        
     }
 
@@ -38,6 +38,7 @@ public class Alarmclock {
     public void addAlarm(Alarm alarm) {
         alarms.add(alarm);
         }
+
 
 
     // EFFECTS: if there is an alarm set is the same time as the local time, then alarm should ring

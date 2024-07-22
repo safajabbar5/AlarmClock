@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class TestAlarmclock {
 
@@ -64,8 +65,11 @@ public class TestAlarmclock {
     
     @Test
     void testalarmIsPlaying() {
+        LocalTime now = LocalTime.now();
         Alarm currenttime = new Alarm(currentLocalhour.getHour(), currentLocalmin.getMinute());
         alarmList.add(currenttime);
+        assertFalse(currenttime.equals(testa1));
+        assertFalse(currenttime.equals(testa1));
         assertTrue(testAlarmClock.alarmIsPlaying(currenttime));
         
     }
