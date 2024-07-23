@@ -1,7 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+
+import model.Persistence.Writable;
+
 // A class representing a Alarm with a set time in hours and mintues
-public class Alarm {
+public class Alarm implements Writable{
    
     private int alarm;
     private int min;   
@@ -43,6 +47,15 @@ public class Alarm {
     public int getMinutes() {
         return min;
         }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("hours", hrs);
+        json.put("minutes", min);
+        return json;
+    
+    }
 
     
 

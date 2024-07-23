@@ -3,7 +3,11 @@ package ui;
 import model.Riddle;
 import model.Alarmclock;
 import model.Alarm;
+import model.Persistence.JsonReader;
+import model.Persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +16,14 @@ import java.util.Random;
 
 //  A riddle application that allows user to answer the riddle and stop the alarm
 public class RiddlesReviewer {
+    private static final String JSON_STORE = "./data/alarmclock.json";
     private Alarm currentalarm;
     private Alarmclock alarmClock;
     private List<Riddle> riddles;
     private Scanner scanner;
     private boolean isAlarmRunning;
+     private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: creates an instance of the RiddlesReviewer console ui application   // used lab 3 as a reference
     public RiddlesReviewer() {
@@ -25,6 +32,8 @@ public class RiddlesReviewer {
         this.scanner = new Scanner(System.in);
         this.isAlarmRunning = true;
         this.riddles = new ArrayList<>();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         readyRiddles();
 
         printSnoozes();
@@ -64,7 +73,9 @@ public class RiddlesReviewer {
     public void displayMenu() {
         System.out.println("Please select an option:");
         System.out.println("1) Set an alarm in a 24-hour clock");
-        System.out.println("2) Exit the application");
+        System.out.println("2) Save set alarmclocks to file");
+        System.out.println("3) Load alarmclocks from file");
+        System.out.println("4) Exit the application");
         printSnoozes();
     }
 
@@ -76,6 +87,12 @@ public class RiddlesReviewer {
                 setAlarmTime();
                 break;
             case "2":
+                savecurrentAlarm();
+                break;
+            case "3":
+                loadAlarmClock();
+                break;
+            case "4":
                 isAlarmRunning = false;
                 System.out.println("Exiting the application");
                 break;
@@ -111,7 +128,15 @@ public class RiddlesReviewer {
                 checkAndHandleAlarm();
             }
             getAlarms();
+            System.out.println("Do you want to save your alarm (yes/no)");
+            String userRes = scanner.nextLine();
+                if (userRes.equals("yes")) {
+                    savecurrentAlarm();
+                } else {
+            getAlarms();
+            System.out.println("Your alarmclock will ring, when it is time to wake you up");
             System.out.println("Good Night!! :)");
+                }
             
             
         }
@@ -178,4 +203,29 @@ public class RiddlesReviewer {
     private void printSnoozes() {
         System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
     }
+
+
+     // EFFECTS: saves the workroom to file
+    private void savecurrentAlarm() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(alarmClock);
+            jsonWriter.close();
+            System.out.println("Saved alarm clock to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadAlarmClock() {
+        try {
+            alarmClock = jsonReader.read();
+            System.out.println("Loaded alarm clock from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
 }
+

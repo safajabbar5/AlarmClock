@@ -3,12 +3,18 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import model.Persistence.Writable;
+
 import java.time.LocalTime;
 
 
 
     // A class representing an alarm clock that shows the list of confirmed alarms, and compares alarm with local time  
-public class Alarmclock {
+public class Alarmclock implements Writable{
     private Alarm alarm;
     private List<Alarm> alarms;
     private LocalTime currentLocalhour;
@@ -58,6 +64,23 @@ public class Alarmclock {
      public List<Alarm> getAlarms() {
          return alarms;
      }
+
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("alarms", alarmsToJson());
+        return json;
+    }
+
+    private JSONArray alarmsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Alarm a: alarms) {
+            jsonArray.put(a.toJson());
+        }
+        return jsonArray;
+    }
 
     }
 
