@@ -16,22 +16,25 @@ import java.util.Random;
 
 //  A riddle application that allows user to answer the riddle and stop the alarm
 public class RiddlesReviewer {
+    // used the jsonSerializationDemo as a reference
     private static final String JSON_STORE = "./data/alarmClock.json";
     private Alarm currentalarm;
     private Alarmclock alarmClock;
     private List<Riddle> riddles;
     private Scanner scanner;
     private boolean isAlarmRunning;
-     private JsonWriter jsonWriter;
+    private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-    // EFFECTS: creates an instance of the RiddlesReviewer console ui application   // used lab 3 as a reference
+    // EFFECTS: creates an instance of the RiddlesReviewer console ui application
+    // used lab 3 as a reference
     public RiddlesReviewer() {
-        this.currentalarm = null;   
+        this.currentalarm = null;
         this.alarmClock = new Alarmclock();
         this.scanner = new Scanner(System.in);
         this.isAlarmRunning = true;
         this.riddles = new ArrayList<>();
+        // used the jsonSerializationDemo as a reference
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         readyRiddles();
@@ -40,9 +43,9 @@ public class RiddlesReviewer {
         System.out.println("Welcome to the AlarmClock app - the perfect way to say goodbye to your sleep!!");
 
         handleMenu();
-        
+
         while (this.isAlarmRunning) {
-            checkAndHandleAlarm();
+            checkAlarm();
         }
     }
 
@@ -88,9 +91,11 @@ public class RiddlesReviewer {
                 break;
             case "2":
                 savecurrentAlarm();
+                handleMenu();
                 break;
             case "3":
                 loadAlarmClock();
+                handleMenu();
                 break;
             case "4":
                 isAlarmRunning = false;
@@ -102,12 +107,10 @@ public class RiddlesReviewer {
         printSnoozes();
     }
 
-
-
     // EFFECTS: sets the alarm time based on the user input
     private void setAlarmTime() {
         boolean setMoreAlarms = true;
-        
+
         while (setMoreAlarms) {
             System.out.println("Enter the time (hour) for your alarm, please choose between (0-23)");
             int hour = Integer.parseInt(scanner.nextLine());
@@ -122,108 +125,103 @@ public class RiddlesReviewer {
 
             System.out.println("Do you want to set another alarm? (yes/no)");
             String userRes = scanner.nextLine();
-                if (userRes.equals("no")) {
-                    setMoreAlarms = false;
-                }
-                checkAndHandleAlarm();
+            if (userRes.equals("no")) {
+                setMoreAlarms = false;
             }
+            checkAlarm();
+        }
+        getAlarms();
+        savingandloadingAlarm();
+        checkAlarm();
+
+    }
+
+    // EFFECTS: saves and loads set alarm based on the users input
+    private void savingandloadingAlarm() {
+        System.out.println("Do you want to save your alarm (yes/no)");
+        String userRes = scanner.nextLine();
+        if (userRes.equals("yes")) {
+            savecurrentAlarm();
+            System.out.println("Do you want to load your alarm (yes/no)");
+            String userRes1 = scanner.nextLine();
+            if (userRes1.equals("yes")) {
+                loadAlarmClock();
+                lastMessage();
+            } else {
+                getAlarms();
+                lastMessage();
+            }
+        } else {
             getAlarms();
-            savingandloadingAlarm();
-            checkAndHandleAlarm();
-            
-                 
-            
-            
+            lastMessage();
         }
 
-        private void savingandloadingAlarm() {
-            System.out.println("Do you want to save your alarm (yes/no)");
-            String userRes = scanner.nextLine();
-                if (userRes.equals("yes")) {
-                    savecurrentAlarm();
-                    System.out.println("Do you want to load your alarm (yes/no)");
-                    String userRes1 = scanner.nextLine();
-                    if (userRes1.equals("yes")) {
-                        loadAlarmClock();
-                    } else {
-                        getAlarms();
-                        lastMessage();
-                    }
-                 } else {
-                        getAlarms();
-                        lastMessage();
-                        }
+    }
 
-        }
-         
+    // EFFECTS: makes a last message after the user has saved or loaded their alarm
     private void lastMessage() {
         System.out.println("Your alarmclock will ring, when it is time to wake you up");
         System.out.println("Good Night!! :)");
     }
 
+    // EFFECTS: prints the set alarms that the user has added to the alarm clock
     private void getAlarms() {
         List<Alarm> alarms = alarmClock.getAlarms();
         printSnoozes();
         System.out.println("Here are your current set of alarms");
-        for(Alarm alarm : alarms) {
+        for (Alarm alarm : alarms) {
             System.out.println(alarm.getHours() + ":" + alarm.getMinutes());
         }
 
     }
-    
 
-    // EFFECTS: checks if the alarm set is the same as the local time, 
-    //          if it is the same then play the alarm, and display a riddle for the user to solve.
-    //          If the user solves the riddle then stop the alarm, if not then keep playing the alarm.
-    private void checkAndHandleAlarm() {
+    // EFFECTS: checks if the alarm set is the same as the local time,
+    // if it is the same then play the alarm, and display a riddle for the user to
+    // solve.
+    // If the user solves the riddle then stop the alarm, if not then keep playing
+    // the alarm.
+    private void checkAlarm() {
         LocalTime now = LocalTime.now();
         List<Alarm> alarms = alarmClock.getAlarms();
-        
-        
         for (Alarm alarm : alarms) {
             if (alarm.getHours() == now.getHour() && alarm.getMinutes() == now.getMinute()) {
-            System.out.println("Good Morning!");
-            System.out.println("ALARM IS RINGING!");
-            System.out.println("ALARM IS RINGING!");
-            System.out.println("Solve this riddle to stop the alarm\"");
-            printSnoozes();
-            Riddle riddle = getRandomRiddle();
-            boolean correctAnswer = false;
-        
-            while (!correctAnswer) {
-                System.out.println(riddle.getQuestion());
-                String answer = scanner.nextLine();
-                if (riddle.checkRiddleAnswer(answer)) {
-                    System.out.println("Correct! Alarm stopped.");
-                    correctAnswer = true;
-                    alarms.remove(alarm);
-                    break;
-                } else {
+                System.out.println("Good Morning!");
+                System.out.println("ALARM IS RINGING!");
+                System.out.println("Solve this riddle to stop the alarm\"");
+                Riddle riddle = getRandomRiddle();
+                boolean correctAnswer = false;
+                while (!correctAnswer) {
+                    System.out.println(riddle.getQuestion());
+                    String answer = scanner.nextLine();
+                    if (riddle.checkRiddleAnswer(answer)) {
+                        System.out.println("Correct! Alarm stopped.");
+                        correctAnswer = true;
+                        alarms.remove(alarm);
+                        break;
+                    } else {
                         System.out.println("Incorrect! Try again.");
                     }
                 }
             }
-        } 
+        }
     }
 
     // EFFECTS: randomly get a riddle from the readyriddle list of riddles above
 
-    private Riddle getRandomRiddle() {        // used diceGame from lecture lab as a reference
+    private Riddle getRandomRiddle() { // used diceGame from lecture lab as a reference
         Random random = new Random();
         int index = random.nextInt(riddles.size());
         return riddles.get(index);
 
     }
 
-    
-
     // EFFECTS: prints out a line of snoozes to act as a divider
     private void printSnoozes() {
         System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
     }
 
-
-     // EFFECTS: saves the workroom to file
+    // EFFECTS: saves the workroom to file
+    // used the jsonSerializationDemo as a reference
     private void savecurrentAlarm() {
         try {
             jsonWriter.open();
@@ -237,6 +235,7 @@ public class RiddlesReviewer {
 
     // MODIFIES: this
     // EFFECTS: loads workroom from file
+    // used the jsonSerializationDemo as a reference
     private void loadAlarmClock() {
         try {
             alarmClock = jsonReader.read();
@@ -246,4 +245,3 @@ public class RiddlesReviewer {
         }
     }
 }
-

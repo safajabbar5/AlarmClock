@@ -48,6 +48,7 @@ public class Alarm implements Writable{
         return min;
         }
 
+    // used the jsonSerializationDemo as a reference for the next method
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

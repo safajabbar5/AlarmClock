@@ -13,7 +13,7 @@ As a user, I want to add alarm times to my alarm clock.
 
 As a user, I want to view the alarm times set up for the alarm clock.
 
-As a user, I must solve the riddle to turn off my alarm. 
+As a user, I must solve a riddle to turn off my alarm. 
 
 As a user, I want random riddles for each time I set an alarm.
 

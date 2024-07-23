@@ -1,0 +1,10 @@
+{"alarms": [
+    {
+        "hours": 12,
+        "minutes": 30
+    },
+    {
+        "hours": 8,
+        "minutes": 45
+    }
+]}

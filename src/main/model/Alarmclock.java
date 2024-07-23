@@ -65,7 +65,7 @@ public class Alarmclock implements Writable{
          return alarms;
      }
 
-
+    // used the jsonSerializationDemo as a reference for the next two methods in this Class
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

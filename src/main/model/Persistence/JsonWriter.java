@@ -6,6 +6,8 @@ import org.json.JSONObject;
 
 import java.io.*;
 
+// Represents a writer that writes the alarmclock data from JSON data stored in file
+// used the jsonSerializationDemo as a reference for everything in this Class
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
@@ -24,7 +26,7 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
+    // EFFECTS: writes JSON representation of alarmclock to file
     public void write(Alarmclock aclock) {
         JSONObject json = aclock.toJson();
         saveToFile(json.toString(TAB));

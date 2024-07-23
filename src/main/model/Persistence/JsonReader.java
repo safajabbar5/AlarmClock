@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 import org.json.*;
 
 // Represents a reader that reads the alarmclock data from JSON data stored in file
+// used the jsonSerializationDemo as a reference for everything in this Class
 public class JsonReader {
     private String source;
 
@@ -41,15 +42,15 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses alarmclock from JSON object and returns it
     private Alarmclock parseAlarmclock(JSONObject jsonObject) {
         Alarmclock aclock = new Alarmclock();
         addAlarms(aclock, jsonObject);
         return aclock;
     }
 
-     // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+     // MODIFIES: this
+    // EFFECTS: parses alarms from JSON object and adds them to alarmclock
     private void addAlarms(Alarmclock alarmclock, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("alarms");
         for (Object json : jsonArray) {
@@ -58,8 +59,8 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // MODIFIES: this
+    // EFFECTS: parses alarm from JSON object and adds it to alarmclock
     private void addAlarm(Alarmclock alarmclock, JSONObject jsonObject) {
         int hours = jsonObject.getInt("hours");
         int minutes = jsonObject.getInt("minutes");
