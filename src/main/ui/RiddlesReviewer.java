@@ -16,7 +16,7 @@ import java.util.Random;
 
 //  A riddle application that allows user to answer the riddle and stop the alarm
 public class RiddlesReviewer {
-    private static final String JSON_STORE = "./data/alarmclock.json";
+    private static final String JSON_STORE = "./data/alarmClock.json";
     private Alarm currentalarm;
     private Alarmclock alarmClock;
     private List<Riddle> riddles;
@@ -128,20 +128,38 @@ public class RiddlesReviewer {
                 checkAndHandleAlarm();
             }
             getAlarms();
+            savingandloadingAlarm();
+            checkAndHandleAlarm();
+            
+                 
+            
+            
+        }
+
+        private void savingandloadingAlarm() {
             System.out.println("Do you want to save your alarm (yes/no)");
             String userRes = scanner.nextLine();
                 if (userRes.equals("yes")) {
                     savecurrentAlarm();
-                } else {
-            getAlarms();
-            System.out.println("Your alarmclock will ring, when it is time to wake you up");
-            System.out.println("Good Night!! :)");
-                }
-            
-            
+                    System.out.println("Do you want to load your alarm (yes/no)");
+                    String userRes1 = scanner.nextLine();
+                    if (userRes1.equals("yes")) {
+                        loadAlarmClock();
+                    } else {
+                        getAlarms();
+                        lastMessage();
+                    }
+                 } else {
+                        getAlarms();
+                        lastMessage();
+                        }
+
         }
          
-    
+    private void lastMessage() {
+        System.out.println("Your alarmclock will ring, when it is time to wake you up");
+        System.out.println("Good Night!! :)");
+    }
 
     private void getAlarms() {
         List<Alarm> alarms = alarmClock.getAlarms();

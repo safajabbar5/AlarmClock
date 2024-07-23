@@ -1,10 +1,11 @@
 package model.Persistence;
-import model.Alarm;
+
 import model.Alarmclock;
 import org.json.JSONObject;
 
 
 import java.io.*;
+
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;

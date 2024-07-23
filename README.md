@@ -21,7 +21,7 @@ As a user, I want to be able to save the state of my alarm clock setting to file
 
 As a user, I want to be able to load the saved state of my alarm clock setting from file (if I choose to do so). 
 
-As a user, when I select the quit option from the application menu, I want to be reminded to save the state of my alarm clock setting to file and have the option to do so or not.
+As a user, when I am done setting my alarms, I want to be reminded to save the state of my alarm clock setting to file and have the option to do so or not.
 
 As a user, when I start the application, I want to be given the option to load my alarm clock setting from file.
 
