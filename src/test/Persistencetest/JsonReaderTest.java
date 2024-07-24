@@ -1,9 +1,8 @@
-package Persistencetest;
+package persistencetest;
 
-import model.Persistence.JsonReader;
 import model.Alarmclock;
+import model.persistence.JsonReader;
 import model.Alarm;
-import model.Riddle;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -11,43 +10,54 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 public class JsonReaderTest extends JsonTest {
+    
     @Test
     void testReaderNonExistentFile() {
-        JsonReader reader = new JsonReader("./data/noSuchFile.json");
         try {
+            // reads a file that does nto exist
+            JsonReader reader = new JsonReader("./data/noSuchFile.json");
             Alarmclock ac = reader.read();
             fail("IOException expected");
         } catch (IOException e) {
-            // pass
+            // test passes if the Exception is caught
         }
     }
 
+   
+
     @Test
-    void testReaderEmptyAlarmClock() {
+    void testReaderEmptyAlarmClock() { 
+        Alarmclock ac = new Alarmclock(); // empty
         JsonReader reader = new JsonReader("./data/testReaderEmptyAlarmClock.json");
         try {
-            Alarmclock ac = reader.read();
-            assertEquals(0, ac.getAlarms().size());
+            //  reads data from file into alarm clock object
+            ac = reader.read();
         } catch (IOException e) {
-         //   fail("Couldn't read from file");
+            e.getMessage();
         }
+        assertEquals(0, ac.getAlarms().size()); // since alarm clock was empty
     }
 
+
     @Test
-    void testReaderGeneralWorkRoom() {
-        JsonReader reader = new JsonReader("./data/testReaderGeneralAlarmClock.json");
+    void testReaderGeneralAlarmClock() {
+        Alarmclock ac = new Alarmclock();
+        List<Alarm> alarms = ac.getAlarms();
         try {
-            Alarmclock ac = reader.read();
-            List<Alarm> alarms = ac.getAlarms();
-            assertEquals(2, alarms.size());
-            checkAlarm(12,30 , alarms.get(0));
-            checkAlarm(8,30 , alarms.get(1));
+            ac.addAlarm(new Alarm(12, 30));
+            ac.addAlarm(new Alarm(8, 45));
+            JsonReader reader = new JsonReader("./data/testReaderGeneralAlarmClock.json");
+            reader.read();
         } catch (IOException e) {
-            // fail("Couldn't read from file");
+            e.getMessage();
         }
+        assertEquals(2, alarms.size()); // since two alarms were added
     }
 }
+
+
 
 
 

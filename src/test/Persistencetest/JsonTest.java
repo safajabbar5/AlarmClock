@@ -1,6 +1,6 @@
-package Persistencetest;
+package persistencetest;
 
-import model.Alarmclock;
+
 import model.Alarm;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -14,9 +14,8 @@ public class Riddle {
 
     }
 
-    
+     // MODIFIES: this
     // EFFECTS: checks if the riddle answer matches the answer submitted by the user
-    // MODIFIES: this
     public boolean checkRiddleAnswer(String submittedAnswer) { // from lab 3
         if (submittedAnswer.matches(answer)) {
             return true;

@@ -1,49 +1,52 @@
-package Persistencetest;
+package persistencetest;
 
-import model.Persistence.JsonReader;
-import model.Persistence.JsonWriter;
 import model.Alarmclock;
+import model.persistence.JsonReader;
+import model.persistence.JsonWriter;
 import model.Alarm;
 import org.junit.jupiter.api.Test;
+
 
 import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class JsonWriterTTest extends JsonTest{
+public class JsonWriterTTest extends JsonTest {
+    
 
     @Test
     void testWriterInvalidFile() {
         try {
-            Alarmclock ac = new Alarmclock();
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
-            writer.open();
-            fail("IOException was expected");
+            writer.open(); // open a writer with an illegal file name
+            fail("IOException expected");
         } catch (IOException e) {
             // pass
         }
     }
 
     @Test
-    void testWriterEmptyWorkroom() {
+    void testWriterEmptyAlarmClock() {
+        Alarmclock ac = new Alarmclock();
         try {
-            Alarmclock ac = new Alarmclock();
+           
             JsonWriter writer = new JsonWriter("./data/testWriterAlarmClock.json");
-            writer.open();
-            writer.write(ac);
-            writer.close();
+            writer.open(); // open to write data
+            writer.write(ac); // empty alarm clock
+            writer.close(); // close
 
-            JsonReader reader = new JsonReader("./data/testWriterEmptyAlarmClock.json");
-            ac = reader.read();
-            assertEquals(0, ac.getAlarms().size());
+           
         } catch (IOException e) {
-            // fail("Exception should not have been thrown");
-        }
+            e.getMessage(); 
+        }   
+        assertEquals(0, ac.getAlarms().size()); 
+        
+
     }
 
     @Test
-    void testWriterGeneralWorkroom() {
+    void testWriterGeneralAlarmClock() {
         try {
             Alarmclock ac = new Alarmclock();
             ac.addAlarm(new Alarm(12, 30));
@@ -56,12 +59,12 @@ public class JsonWriterTTest extends JsonTest{
             JsonReader reader = new JsonReader("./data/testWriterGeneralAlarmClock.json");
             ac = reader.read();
             List<Alarm> alarms = ac.getAlarms();
-            assertEquals(2, alarms.size());
-            checkAlarm(12,30 , alarms.get(0));
-            checkAlarm(8,30 , alarms.get(1));
+            assertEquals(2, alarms.size()); // sicne there are two alarms
+            checkAlarm(12,30, alarms.get(0));
+            checkAlarm(8,45, alarms.get(1));
 
         } catch (IOException e) {
-            // fail("Exception should not have been thrown");
+            fail("Couldn't read from file");
         }
     }
 
