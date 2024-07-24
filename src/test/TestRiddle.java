@@ -6,17 +6,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import model.Riddle;
-    
+
 public class TestRiddle {
 
     private Riddle testRiddle;
-        
-    @BeforeEach
-        void runBefore() {
-            testRiddle = new Riddle ("this is hard","true");
-    
-        }
 
+    @BeforeEach
+    void runBefore() {
+        testRiddle = new Riddle("this is hard", "true");
+
+    }
 
     @Test
     void testConstructor() {
@@ -31,6 +30,4 @@ public class TestRiddle {
         assertFalse(testRiddle.checkRiddleAnswer("10"));
     }
 
-    }
-    
-
+}

@@ -1,8 +1,8 @@
-package model.Persistence;
+package model.persistence;
 
 import model.Alarm;
 import model.Alarmclock;
-import model.Riddle;
+
 
 
 import java.io.IOException;

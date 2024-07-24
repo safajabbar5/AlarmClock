@@ -15,14 +15,14 @@ As a user, I want to view the alarm times set up for the alarm clock.
 
 As a user, I must solve a riddle to turn off my alarm. 
 
-As a user, I want random riddles for each time I set an alarm.
+As a user, I want to be given a many tries to solve the riddle.
 
-As a user, I want to be able to save the state of my alarm clock setting to file (if I choose to do so).
+As a user, I want to be able to save the state of my alarm clock to file (if I choose to do so).
 
-As a user, I want to be able to load the saved state of my alarm clock setting from file (if I choose to do so). 
+As a user, I want to be able to load the state of my saved alarm clock from file (if I choose to do so). 
 
-As a user, when I am done setting my alarms, I want to be reminded to save the state of my alarm clock setting to file and have the option to do so or not.
+As a user, when I am done setting my alarms, I want to be reminded to save the state of my set alarms to file and have the option to do so or not.
 
-As a user, when I start the application, I want to be given the option to load my alarm clock setting from file.
+As a user, when I start the application, I want to be given the option to load my saved alarms from file.
 
   

@@ -19,7 +19,7 @@ public class TestAlarmclock {
     private Alarm testa2;
     private LocalDateTime currentLocalhour;
     private LocalDateTime currentLocalmin;
-    
+
     @BeforeEach
     void runBefore() {
 
@@ -29,17 +29,13 @@ public class TestAlarmclock {
         testa2 = new Alarm(9, 30);
         this.currentLocalhour = LocalDateTime.now();
         this.currentLocalmin = LocalDateTime.now();
-        
 
     }
-
-    
 
     @Test
     void testConstructor() {
         assertNull(testAlarmClock.getRecentAlarm());
-        
-    
+
     }
 
     @Test
@@ -48,21 +44,20 @@ public class TestAlarmclock {
         assertEquals(testa1, testAlarmClock.getRecentAlarm());
         testAlarmClock.setCurrentAlarm(testa2);
         assertEquals(testa2, testAlarmClock.getRecentAlarm());
-        
+
     }
 
     @Test
     void testaddAlarm() {
-         testAlarmClock.addAlarm(testa1);
-         testAlarmClock.addAlarm(testa2);
-         alarmList = testAlarmClock.getAlarms();
+        testAlarmClock.addAlarm(testa1);
+        testAlarmClock.addAlarm(testa2);
+        alarmList = testAlarmClock.getAlarms();
         assertEquals(2, alarmList.size());
         assertEquals(testa1, alarmList.get(0));
         assertEquals(testa2, alarmList.get(1));
 
-
     }
-    
+
     @Test
     void testalarmIsPlaying() {
         LocalTime now = LocalTime.now();
@@ -71,12 +66,7 @@ public class TestAlarmclock {
         assertFalse(currenttime.equals(testa1));
         assertFalse(currenttime.equals(testa1));
         assertTrue(testAlarmClock.alarmIsPlaying(currenttime));
-        
+
     }
 
-  
-
-    
 }
-
-
