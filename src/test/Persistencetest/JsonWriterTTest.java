@@ -22,7 +22,7 @@ public class JsonWriterTTest extends JsonTest {
             writer.open(); // open a writer with an illegal file name
             fail("IOException expected");
         } catch (IOException e) {
-            // pass
+            // test passes if the Exception is caught
         }
     }
 
@@ -35,10 +35,9 @@ public class JsonWriterTTest extends JsonTest {
             writer.open(); // open to write data
             writer.write(ac); // empty alarm clock
             writer.close(); // close
-
            
         } catch (IOException e) {
-            e.getMessage(); 
+            fail("IOException expected");
         }   
         assertEquals(0, ac.getAlarms().size()); 
         
@@ -59,7 +58,7 @@ public class JsonWriterTTest extends JsonTest {
             JsonReader reader = new JsonReader("./data/testWriterGeneralAlarmClock.json");
             ac = reader.read();
             List<Alarm> alarms = ac.getAlarms();
-            assertEquals(2, alarms.size()); // sicne there are two alarms
+            assertEquals(2, alarms.size()); // since there are two alarms
             checkAlarm(12,30, alarms.get(0));
             checkAlarm(8,45, alarms.get(1));
 

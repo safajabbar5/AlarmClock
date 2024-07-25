@@ -34,8 +34,10 @@ public class JsonReaderTest extends JsonTest {
         try {
             //  reads data from file into alarm clock object
             ac = reader.read();
+            // Can't read from an empty file
+            fail("Couldn't read from file");
         } catch (IOException e) {
-            e.getMessage();
+            // pass
         }
         assertEquals(0, ac.getAlarms().size()); // since alarm clock was empty
     }
