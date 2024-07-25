@@ -61,7 +61,7 @@ public class Alarmclock implements Writable {
     }
 
     // used the jsonSerializationDemo as a reference for the next two methods in
-    // this Class
+    // EFFECTS: returns alarmclock as Json object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -69,6 +69,7 @@ public class Alarmclock implements Writable {
         return json;
     }
 
+    // EFFECTS: creates Json array from the alarms list
     private JSONArray alarmsToJson() {
         JSONArray jsonArray = new JSONArray();
 

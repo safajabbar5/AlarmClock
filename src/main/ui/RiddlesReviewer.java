@@ -81,8 +81,8 @@ public class RiddlesReviewer {
     public void displayMenu() {
         System.out.println("Please select an option:");
         System.out.println("1) Set an alarm in a 24-hour clock");
-        System.out.println("2) Save set alarmclocks to file");
-        System.out.println("3) Load alarmclocks from file");
+        System.out.println("2) Save alarms to file");
+        System.out.println("3) Load alarms from file");
         System.out.println("4) Exit the application");
         printSnoozes();
     }
@@ -181,7 +181,7 @@ public class RiddlesReviewer {
     private void checkAlarm() {
         LocalTime now = LocalTime.now();
         List<Alarm> alarms = alarmClock.getAlarms();
-        alarms.removeIf(alarm -> {  
+        alarms.removeIf(alarm -> {   // lambda expression to determine which alarm to remove from list
             if (alarm.getHours() == now.getHour() && alarm.getMinutes() == now.getMinute()) {
                 System.out.println("YOUR ALARM IS RINGING!");
                 System.out.println("Solve this riddle to stop the alarm\"");

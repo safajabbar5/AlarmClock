@@ -1,10 +1,10 @@
 {"alarms": [
     {
-        "hours": 12,
+        "hours": 16,
         "minutes": 30
     },
     {
-        "hours": 12,
-        "minutes": 45
+        "hours": 15,
+        "minutes": 40
     }
 ]}

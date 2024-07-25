@@ -9,19 +9,19 @@ I am always late to my classes because I tend to turn off my alarm and fall back
 
 ## User Stories
 
-As a user, I want to add alarm times to my alarm clock.
+As a user, I want to be able to set an alarm on my alarm clock.
 
-As a user, I want to view the alarm times set up for the alarm clock.
+As a user, I want to view all the set alarms for my alarm clock.
 
 As a user, I must solve a riddle to turn off my alarm. 
 
-As a user, I want to be given a many tries to solve the riddle.
+As a user, I want to be given as many tries as I need to solve the riddle.
 
-As a user, I want to be able to save the state of my alarm clock to file (if I choose to do so).
+As a user, I want to be able to save my set alarms to file (if I choose to do so).
 
-As a user, I want to be able to load the state of my saved alarm clock from file (if I choose to do so). 
+As a user, I want to be able to load my saved alarms from file (if I choose to do so). 
 
-As a user, when I am done setting my alarms, I want to be reminded to save the state of my set alarms to file and have the option to do so or not.
+As a user, when I am done setting my alarms, I want to be reminded to save my set alarms to file and have the option to do so or not.
 
 As a user, when I start the application, I want to be given the option to load my saved alarms from file.
 
