@@ -25,4 +25,7 @@ As a user, when I am done setting my alarms, I want to be reminded to save my se
 
 As a user, when I start the application, I want to be given the option to load my saved alarms from file.
 
+As a user, I want to see a visual representation (like an image or graph) related to my alarms or riddles, enhancing my interaction with the application.
+
+As a user, I want to be able to filter or search through my list of set alarms, so I can easily find and manage them.
   
