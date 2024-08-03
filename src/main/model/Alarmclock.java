@@ -43,12 +43,9 @@ public class Alarmclock implements Writable {
     // alarm should ring
     // MODIFIES: this
     public Boolean alarmIsPlaying(Alarm alarm) {
-        if (alarm.getHours() == currentLocalhour.getHour() && alarm.getMinutes() == currentLocalmin.getMinute()) {
-            return true;
-        } else {
-            return false;
-        }
+        return (alarm.getHours() == currentLocalhour.getHour() && alarm.getMinutes() == currentLocalmin.getMinute());
     }
+      
 
     // EFFECTS: returns the current alarm that is set
     public Alarm getRecentAlarm() {
