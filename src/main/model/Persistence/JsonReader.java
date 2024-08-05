@@ -3,8 +3,7 @@ package model.persistence;
 import model.Alarm;
 import model.Alarmclock;
 
-
-
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -66,6 +65,11 @@ public class JsonReader {
         int minutes = jsonObject.getInt("minutes");
         Alarm alarm = new Alarm(hours, minutes);
         alarmclock.addAlarm(alarm);
+    }
+
+    public Alarmclock read(File file) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'read'");
     }
 
 }

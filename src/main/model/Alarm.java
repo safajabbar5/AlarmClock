@@ -48,6 +48,11 @@ public class Alarm implements Writable {
         return min;
     }
 
+    @Override
+    public String toString() {
+        return getHours() + ":" + getMinutes();
+    }
+
     // used the jsonSerializationDemo as a reference for the next method
     // EFFECTS: returns Alarm as Json object
     @Override

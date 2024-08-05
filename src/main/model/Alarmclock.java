@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JList;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -55,6 +57,10 @@ public class Alarmclock implements Writable {
     // EFFECTS: returns the current alarm list that is set
     public List<Alarm> getAlarms() {
         return alarms;
+    }
+
+    public void removeAlarm(Alarm alarm) {
+        alarms.remove(alarm);
     }
 
     // used the jsonSerializationDemo as a reference for the next two methods in

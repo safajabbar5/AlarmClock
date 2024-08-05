@@ -40,10 +40,10 @@ public class RiddlesReviewer {
         jsonReader = new JsonReader(JSON_STORE);
         readyRiddles();
 
-        printSnoozes();
-        System.out.println("Welcome to the AlarmClock app - the perfect way to say goodbye to your sleep!!");
+        // printSnoozes();
+        // System.out.println("Welcome to the AlarmClock app - the perfect way to say goodbye to your sleep!!");
 
-        handleMenu();
+        // handleMenu();
 
         while (this.isAlarmRunning) {
             checkAlarm();
@@ -203,9 +203,11 @@ public class RiddlesReviewer {
         });
     }
 
+   
+
     // EFFECTS: randomly get a riddle from the readyriddle list of riddles
     // used diceGame from lecture lab as a reference
-    private Riddle getRandomRiddle() { 
+    Riddle getRandomRiddle() { 
         Random random = new Random();
         int index = random.nextInt(riddles.size());
         return riddles.get(index);
@@ -234,7 +236,7 @@ public class RiddlesReviewer {
     // MODIFIES: this
     // EFFECTS: loads set alarms from file
     // used the jsonSerializationDemo as a reference
-    private void loadAlarmClock() {
+    void loadAlarmClock() {
         try {
             alarmClock = jsonReader.read();
             System.out.println("Loaded alarm clock from " + JSON_STORE);
