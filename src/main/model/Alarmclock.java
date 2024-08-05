@@ -44,9 +44,9 @@ public class Alarmclock implements Writable {
     // EFFECTS: if there is an alarm set is the same time as the local time, then
     // alarm should ring
     // MODIFIES: this
-    public Boolean alarmIsPlaying(Alarm alarm) {
-        return (alarm.getHours() == currentLocalhour.getHour() && alarm.getMinutes() == currentLocalmin.getMinute());
-    }
+    // public Boolean alarmIsPlaying(Alarm alarm) {
+    //     return (alarm.getHours() == currentLocalhour.getHour() && alarm.getMinutes() == currentLocalmin.getMinute());
+    // }
       
 
     // EFFECTS: returns the current alarm that is set
@@ -59,10 +59,7 @@ public class Alarmclock implements Writable {
         return alarms;
     }
 
-    public void removeAlarm(Alarm alarm) {
-        alarms.remove(alarm);
-    }
-
+ 
     // used the jsonSerializationDemo as a reference for the next two methods in
     // EFFECTS: returns alarmclock as Json object
     @Override

@@ -54,7 +54,7 @@ public class AlarmGui extends JFrame {
     public AlarmGui() {
         alarmClock = new Alarmclock();
         riddles = new ArrayList<>();
-      
+
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         readyRiddles();
@@ -68,7 +68,7 @@ public class AlarmGui extends JFrame {
         setScreenWithTime();
         setAllButton();
         addingActiontoButton();
-       // setAlarmCheckTime();
+        // setAlarmCheckTime();
 
         frame.setVisible(true);
     }
@@ -96,7 +96,6 @@ public class AlarmGui extends JFrame {
             }
         });
         timer.start();
-       
 
     }
 
@@ -126,20 +125,19 @@ public class AlarmGui extends JFrame {
 
         frame.add(buttoPanel, BorderLayout.SOUTH);
 
-    }
-
-    private void addingActiontoButton() {
-
         loadButton.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 loadAlarmClock();
             }
         });
 
-        alarmButton.addActionListener(new ActionListener() {
+    }
 
+    private void addingActiontoButton() {
+
+
+        alarmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setAlarmTime();
@@ -147,7 +145,6 @@ public class AlarmGui extends JFrame {
         });
 
         saveButton.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 getAlarms();
@@ -155,7 +152,6 @@ public class AlarmGui extends JFrame {
         });
 
         exitButton.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
@@ -163,7 +159,8 @@ public class AlarmGui extends JFrame {
         });
 
     }
-      // EFFECTS: a riddle list with riddles for the user to solve and end their
+
+    // EFFECTS: a riddle list with riddles for the user to solve and end their
     // alarm.
     public void readyRiddles() {
         riddles.add(new Riddle(
@@ -224,7 +221,7 @@ public class AlarmGui extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-         // alarmSound("data/resources/morning_flower.wav");
+        // alarmSound("data/resources/morning_flower.wav");
 
     }
 
@@ -271,78 +268,75 @@ public class AlarmGui extends JFrame {
         LocalTime now = LocalTime.now();
         List<Alarm> alarms = alarmClock.getAlarms();
         alarms.removeIf(alarm -> {
-       if (alarm.getHours() == now.getHour() && alarm.getMinutes() == now.getMinute()) {
-        Riddle riddle = getRandomRiddle();
-        String riddleanswer = JOptionPane.showInputDialog(riddle.getQuestion());
-        while(!correctAnswer)
-        if (riddle.checkRiddleAnswer(riddleanswer)) {
-            JOptionPane.showMessageDialog(frame, "Correct! Alarm stopped.");
-            correctAnswer = true;
-            break;
-        } else {
-        JOptionPane.showMessageDialog(frame, "Correct! Alarm stopped.");
-        }
-       }
-       return false;
-    });
-}
+            if (alarm.getHours() == now.getHour() && alarm.getMinutes() == now.getMinute()) {
+                Riddle riddle = getRandomRiddle();
+                String riddleanswer = JOptionPane.showInputDialog(riddle.getQuestion());
+                while (!correctAnswer) {
+                    if (riddle.checkRiddleAnswer(riddleanswer)) {
+                        JOptionPane.showMessageDialog(frame, "Correct! Alarm stopped.");
+                        correctAnswer = true;
+                        break;
+                    } else {
+                        JOptionPane.showMessageDialog(frame, "Correct! Alarm stopped.");
+                    }
+                }
+            }
+            return false;
+        });
+    }
 
+    // JOptionPane.getRootFrame().dispose();
 
-                //JOptionPane.getRootFrame().dispose();
-              
-                // JOptionPane.showMessageDialog(frame,"Solve this riddle to stop the alarm");
-                // JOptionPane.getRootFrame().dispose();
+    // JOptionPane.showMessageDialog(frame,"Solve this riddle to stop the alarm");
+    // JOptionPane.getRootFrame().dispose();
 
-               
-    //             boolean correctAnswer = false;
-    //             while (!correctAnswer) {
-    //                 Riddle riddle = getRandomRiddle();
-    //                 String riddleanswer = JOptionPane.showInputDialog(riddle.getQuestion());
-    //                 if (riddleanswer == null) {
-    //                     JOptionPane.showMessageDialog(frame, "Must solve the riddle to stop the alarm");
-    //                 } else if (riddle.checkRiddleAnswer(riddleanswer)) {
-    //                      JOptionPane.showMessageDialog(frame, "Correct! Alarm stopped.");
-    //                     correctAnswer = true;
-    //                     return true;
-    //                 } else {
-    //                     JOptionPane.showMessageDialog(frame, "Incorrect! Try again.");
-    //                 }
-    //             }
-    //         }
-    //         return false;
-    //     });
-    //  }
-
-    // private void checkAlarm() {
-    //     LocalTime now = LocalTime.now();
-    //     List<Alarm> alarms = alarmClock.getAlarms();
-    //     alarms.removeIf(alarm -> { // lambda expression to determine which alarm to remove from list
-    //         if (alarm.getHours() == now.getHour() && alarm.getMinutes() == now.getMinute()) {
-    //             Riddle riddle = getRandomRiddle();
-    //             boolean correctAnswer = false;
-
-    //             while (!correctAnswer) {
-    //                 String riddleAnswer = JOptionPane.showInputDialog(frame, "Solve this riddle " +
-    //                 riddle.getQuestion(),
-    //                 "Input",
-    //                 JOptionPane.QUESTION_MESSAGE);
-    //                 if (riddle.checkRiddleAnswer(riddleAnswer)) {
-    //                     JOptionPane.showMessageDialog(frame, "Correct! Alarm stopped.");
-    //                     correctAnswer = true;
-    //                 } else {
-    //                     JOptionPane.showMessageDialog(frame, "Incorrect! Try again.");
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     return false;
+    // boolean correctAnswer = false;
+    // while (!correctAnswer) {
+    // Riddle riddle = getRandomRiddle();
+    // String riddleanswer = JOptionPane.showInputDialog(riddle.getQuestion());
+    // if (riddleanswer == null) {
+    // JOptionPane.showMessageDialog(frame, "Must solve the riddle to stop the
+    // alarm");
+    // } else if (riddle.checkRiddleAnswer(riddleanswer)) {
+    // JOptionPane.showMessageDialog(frame, "Correct! Alarm stopped.");
+    // correctAnswer = true;
+    // return true;
+    // } else {
+    // JOptionPane.showMessageDialog(frame, "Incorrect! Try again.");
+    // }
+    // }
+    // }
+    // return false;
+    // });
     // }
 
-                
-    
+    // private void checkAlarm() {
+    // LocalTime now = LocalTime.now();
+    // List<Alarm> alarms = alarmClock.getAlarms();
+    // alarms.removeIf(alarm -> { // lambda expression to determine which alarm to
+    // remove from list
+    // if (alarm.getHours() == now.getHour() && alarm.getMinutes() ==
+    // now.getMinute()) {
+    // Riddle riddle = getRandomRiddle();
+    // boolean correctAnswer = false;
 
-
-
+    // while (!correctAnswer) {
+    // String riddleAnswer = JOptionPane.showInputDialog(frame, "Solve this riddle "
+    // +
+    // riddle.getQuestion(),
+    // "Input",
+    // JOptionPane.QUESTION_MESSAGE);
+    // if (riddle.checkRiddleAnswer(riddleAnswer)) {
+    // JOptionPane.showMessageDialog(frame, "Correct! Alarm stopped.");
+    // correctAnswer = true;
+    // } else {
+    // JOptionPane.showMessageDialog(frame, "Incorrect! Try again.");
+    // }
+    // }
+    // }
+    // }
+    // return false;
+    // }
 
     // EFFECTS: randomly get a riddle from the readyriddle list of riddles
     // used diceGame from lecture lab as a reference
@@ -353,15 +347,9 @@ public class AlarmGui extends JFrame {
 
     }
 
-   
-        
-
-  
-
     private void stopAlarm() {
         if (!correctAnswer) {
             clip.stop();
-          
 
         }
     }
