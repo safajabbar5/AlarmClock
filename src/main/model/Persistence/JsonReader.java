@@ -66,10 +66,4 @@ public class JsonReader {
         Alarm alarm = new Alarm(hours, minutes);
         alarmclock.addAlarm(alarm);
     }
-
-    // public Alarmclock read(File file) {
-    //     // TODO Auto-generated method stub
-    //     throw new UnsupportedOperationException("Unimplemented method 'read'");
-    // }
-
 }

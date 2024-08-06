@@ -6,7 +6,7 @@ import model.Riddle;
 import model.persistence.JsonReader;
 import model.persistence.JsonWriter;
 
-import javax.imageio.ImageIO;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -15,7 +15,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -108,7 +107,7 @@ public class AlarmClockGui extends JFrame {
 
     // EFFECTS: constructs 6 buttons on the frame 
     // Got help from SmartHome application in the HomeTab class, the PlaceButton() method
-    // Got help from
+    // Also got help from
     // https://docs.oracle.com/javase/tutorial/uiswing/components/button.html
     public void setAllButton() {
         JPanel buttonPanel = new JPanel();
@@ -278,7 +277,7 @@ public class AlarmClockGui extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: presents a riddle Question to the user and stops the alarm if answered
+    // EFFECTS: presents a riddle Question to the user and stops the alarm if answered correctly
     private void riddleQuestion(Alarm alarm) {
         Random riddlegenerator = new Random();
         Riddle riddle = riddles.get(riddlegenerator.nextInt(riddles.size()));
@@ -334,7 +333,6 @@ public class AlarmClockGui extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: removes the alarm the user wants to remove form the set alarm list
-    
     private void removeAlarm() {
         String rhour = JOptionPane.showInputDialog("Enter the alarm hour that you would like to remove");
         String rmin = JOptionPane.showInputDialog("Enter the alarm Minutes that you would like to remove");
