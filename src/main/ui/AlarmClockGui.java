@@ -167,8 +167,8 @@ public class AlarmClockGui extends JFrame {
         continueActiontoButton();
     }
 
-     // MODIFIES: this
-    // EFFECTS: continue the addActionButton method to add action to remaning buttons
+    // MODIFIES: this
+    // EFFECTS: continue the addActionButton method above and add action to remaning buttons
     // Got help from https://www.tutorialspoint.com/how-to-add-action-listener-to-jbutton-in-java
     private void continueActiontoButton() {
         removeButton.addActionListener(new ActionListener() {
@@ -222,7 +222,7 @@ public class AlarmClockGui extends JFrame {
         }
     }
 
-    // EFFECTS: continuing on the setAlarm method
+    // EFFECTS: continuing on the setAlarm method above
     //          asks the user to set another alarm, and if they want to save their alarm
     // Got help from https://www.geeksforgeeks.org/java-joptionpane/
     private void continueSetAlarmTime() {
