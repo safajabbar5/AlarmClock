@@ -25,13 +25,11 @@ As a user, when I am done setting my alarms, I want to be reminded to save my se
 
 As a user, when I start the application, I want to be given the option to load my saved alarms from file.
 
-As a user, I want to see a visual representation (like an image or graph) related to my alarms or riddles, enhancing my interaction with the application.
+## Instructions for Grader
 
-As a user, I want to be able to filter or search through my list of set alarms, so I can easily find and manage them.
-
-As a user, I want to click a button to set my alarm, and then after I am done I want to be able to view the list of my alarms.
-
-As a user, I want to be able to click a button to remove alarms from my set list of alarms.
-
-As a user, I want to be able to click on a button to load my previous saved alarms and then be given an option to save my alarms.
+- You can generate the first required action related to the user story by clicking on the set Alarms button.
+- You can generate the second required action related to the user story by clicking on the remove Alarms button.
+- You can locate my visual component after the alarm rings.
+- You can save the state of my application by clicking on the save alarm button or after setting ur alarms.
+- You can reload the state of my application by clicking on the load alarms button.
   

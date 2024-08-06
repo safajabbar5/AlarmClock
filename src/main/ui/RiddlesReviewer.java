@@ -40,10 +40,10 @@ public class RiddlesReviewer {
         jsonReader = new JsonReader(JSON_STORE);
         readyRiddles();
 
-        // printSnoozes();
-        // System.out.println("Welcome to the AlarmClock app - the perfect way to say goodbye to your sleep!!");
+        printSnoozes();
+        System.out.println("Welcome to the AlarmClock app - the perfect way to say goodbye to your sleep!!");
 
-        // handleMenu();
+        handleMenu();
 
         while (this.isAlarmRunning) {
             checkAlarm();

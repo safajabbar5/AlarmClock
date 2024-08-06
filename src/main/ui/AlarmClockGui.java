@@ -28,7 +28,7 @@ import java.util.Random;
 // A class that represents the alarm clock on a GUI
 public class AlarmClockGui extends JFrame {
     private JFrame frame;
-    private JLabel timeNow;
+ 
     private JLabel imagelabel;
     private JButton alarmButton;
     private JButton loadButton;
@@ -38,7 +38,7 @@ public class AlarmClockGui extends JFrame {
     private JButton saveButton;
     private Clip clip;
 
-    private Alarm currentalarm;
+
     private Alarmclock alarmClock;
     private ArrayList<Riddle> riddles;
     private JsonWriter jsonWriter;
@@ -49,10 +49,12 @@ public class AlarmClockGui extends JFrame {
     private Boolean alarmRinging = false;
     private boolean setMoreAlarms;
     private boolean isSaved;
+    private boolean alarmRemoved;
+    
     
 
-    // sets up the frame and the title AlarmClock
-    // https://docs.oracle.com/javase/tutorial/uiswing/components/frame.html
+    // EFFECTS: sets up the Jframe with the helper methods and the title AlarmClock
+    // Got help from https://docs.oracle.com/javase/tutorial/uiswing/components/frame.html
     public AlarmClockGui() {
         alarmClock = new Alarmclock();
         riddles = new ArrayList<>();
@@ -66,24 +68,26 @@ public class AlarmClockGui extends JFrame {
         frame.setSize(1000, 500);
 
         frame.getContentPane().setBackground(Color.PINK);
-        setAlarmCheckTime();
         setScreenWithTime();
         setAllButton();
         addingActiontoButton();
+        setAlarmCheckTime();
+        
 
         frame.setVisible(true);
     }
 
+
+    // EFFECTS: set up the JLabel a welcome title and a timer that represents the local time on laptop
     // Got help from
     // https://docs.oracle.com/javase/tutorial/uiswing/components/label.html
-    // EFFECTS: Set up the Jframe with the local time on laptop and a title
     private void setScreenWithTime() {
         JLabel heading = new JLabel("Welcome to the AlarmClock app - the perfect way to say goodbye to your sleep!!");
         heading.setFont(new Font("Times New Roman", Font.BOLD, 25));
         heading.setHorizontalAlignment(SwingConstants.CENTER);
         frame.add(heading, BorderLayout.NORTH);
 
-        timeNow = new JLabel();
+        JLabel timeNow = new JLabel();
         timeNow.setFont(new Font("Times New Roman", Font.BOLD, 100));
         timeNow.setHorizontalAlignment(SwingConstants.CENTER);
         frame.add(timeNow, BorderLayout.CENTER);
@@ -102,16 +106,12 @@ public class AlarmClockGui extends JFrame {
 
     }
 
-    // Got help from SmartHome application in the HomeTab class, the PlaceButton
-    // method
+    // EFFECTS: constructs 6 buttons on the frame 
+    // Got help from SmartHome application in the HomeTab class, the PlaceButton() method
     // Got help from
     // https://docs.oracle.com/javase/tutorial/uiswing/components/button.html
-    // Got help from
-    // https://docs.oracle.com/javase/tutorial/uiswing/components/button.html#contents
-    // EFFECTS: constructs a home tab for console with buttons and a greeting
     public void setAllButton() {
-        JPanel buttoPanel = new JPanel();
-        Box buttonBox = new Box(BoxLayout.Y_AXIS);
+        JPanel buttonPanel = new JPanel();
 
         loadButton = new JButton("Load Alarm");
         viewButton = new JButton("View Current Alarms");
@@ -128,22 +128,23 @@ public class AlarmClockGui extends JFrame {
         removeButton.setFont(new Font("Times New Roman", Font.BOLD,16));
         saveButton.setFont(new Font("Times New Roman", Font.BOLD, 16));
 
-        buttoPanel.add(loadButton);
-        buttoPanel.add(saveButton);
-        buttoPanel.add(alarmButton);
-        buttoPanel.add(viewButton);
-        buttoPanel.add(exitButton);
-        buttoPanel.add(removeButton);
+        buttonPanel.add(loadButton);
+        buttonPanel.add(saveButton);
+        buttonPanel.add(alarmButton);
+        buttonPanel.add(viewButton);
+        buttonPanel.add(exitButton);
+        buttonPanel.add(removeButton);
         
 
-        buttoPanel.add(Box.createHorizontalStrut(15));
+        buttonPanel.add(Box.createHorizontalStrut(15));
 
-        frame.add(buttoPanel, BorderLayout.SOUTH);
+        frame.add(buttonPanel, BorderLayout.SOUTH);
 
     }
 
-    // EFFECTS: adds action to the buttons added on the frame
     // MODIFIES: this
+    // EFFECTS: adds action to the buttons added on the frame
+    // Got help from https://www.tutorialspoint.com/how-to-add-action-listener-to-jbutton-in-java
     private void addingActiontoButton() {
 
         loadButton.addActionListener(new ActionListener() {
@@ -168,8 +169,9 @@ public class AlarmClockGui extends JFrame {
         continueActiontoButton();
     }
 
-    // EFFECTS: continue the addActionButton method
-    // MODIFIES: this
+     // MODIFIES: this
+    // EFFECTS: continue the addActionButton method to add action to remaning buttons
+    // Got help from https://www.tutorialspoint.com/how-to-add-action-listener-to-jbutton-in-java
     private void continueActiontoButton() {
         removeButton.addActionListener(new ActionListener() {
             @Override
@@ -193,11 +195,12 @@ public class AlarmClockGui extends JFrame {
         });
     }
 
-    // used this for reference https://www.geeksforgeeks.org/java-joptionpane/
+    
     // MODIFIES: this
     // EFFECTS: asks the user to set their time for their alarm,
-    // then the set alarms sent to the method getAlarms()
-    // and then to the setAlarmCheckTime()
+    //          then the set alarms sent to the method getAlarms()
+    //          and then to the setAlarmCheckTime()
+    // Got help from https://www.geeksforgeeks.org/java-joptionpane/
     private void setAlarmTime() {
         setMoreAlarms = true;
         while (setMoreAlarms) {
@@ -213,7 +216,8 @@ public class AlarmClockGui extends JFrame {
                 alarmClock.setCurrentAlarm(currentalarm);
                 alarmClock.addAlarm(currentalarm);
 
-                continueSetAlarm();
+                continueSetAlarmTime();
+
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(frame, "Invalid input");
             }
@@ -221,7 +225,9 @@ public class AlarmClockGui extends JFrame {
     }
 
     // EFFECTS: continuing on the setAlarm method
-    private void continueSetAlarm() {
+    //          asks the user to set another alarm, and if they want to save their alarm
+    // Got help from https://www.geeksforgeeks.org/java-joptionpane/
+    private void continueSetAlarmTime() {
         try {
             String response = JOptionPane.showInputDialog("Do you want to set another alarm? (yes/no)");
             if (response.equals("no") || response.equals("n") || response.equals("NO")) {
@@ -239,7 +245,9 @@ public class AlarmClockGui extends JFrame {
         setAlarmCheckTime();
     }
 
-    // EFFECTS: sets up a timer that checks if the alarm should paly or not
+    // EFFECTS: sets up a timer that checks if the alarm should play or not
+    // Got help from 
+    // https://stackoverflow.com/questions/13366780/how-to-add-real-time-date-and-time-into-a-jframe-component-e-g-status-bar
     private void setAlarmCheckTime() {
         Timer alarmCheckTimer = new Timer(0, new ActionListener() {
             @Override
@@ -252,15 +260,14 @@ public class AlarmClockGui extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: checks if the set alarm matches the time on laptop, if yes then
-    // display the ringing image
-    // and play the alarm, also present a riddle for the question for the user to
-    // solve
+    //          display the image, and play the alarm sound
+    //          also present a riddle for the question for the user to solve 
     private void checkAlarm() {
         LocalTime now = LocalTime.now();
         List<Alarm> alarms = alarmClock.getAlarms();
 
-        for (int asize = 0; asize < alarms.size(); asize++) {
-            Alarm alarm = alarms.get(asize);
+        for (int a = 0; a < alarms.size(); a++) {
+            Alarm alarm = alarms.get(a);
             if (alarm.getHours() == now.getHour() && alarm.getMinutes() == now.getMinute() && !alarmRinging) {
                 alarmRinging = true;
                 alarmSound("data/resources/morning_flower.wav");
@@ -271,7 +278,7 @@ public class AlarmClockGui extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: presents a riddle to the user and stops the alarm if answered
+    // EFFECTS: presents a riddle Question to the user and stops the alarm if answered
     private void riddleQuestion(Alarm alarm) {
         Random riddlegenerator = new Random();
         Riddle riddle = riddles.get(riddlegenerator.nextInt(riddles.size()));
@@ -295,11 +302,8 @@ public class AlarmClockGui extends JFrame {
     }
 
     // EFFECTS: prints the set alarms that the user has added to the alarm clock
-    // used for help https://www.geeksforgeeks.org/java-swing-jlist-with-examples/
-    // used for help
-    // https://docs.oracle.com/javase/tutorial/uiswing/components/list.html
-    // used for help
-    // https://docs.oracle.com/javase/tutorial/uiswing/components/editorpane.html
+    // Got help from https://www.geeksforgeeks.org/java-swing-jlist-with-examples/
+    // Got help from https://docs.oracle.com/javase/tutorial/uiswing/components/list.html
     private void getAlarms() {
         List<Alarm> alarms = alarmClock.getAlarms();
         DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -330,14 +334,14 @@ public class AlarmClockGui extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: removes the alarm the user wants to remove form the set alarm list
+    
     private void removeAlarm() {
-        List<Alarm> alarms = alarmClock.getAlarms();
         String rhour = JOptionPane.showInputDialog("Enter the alarm hour that you would like to remove");
         String rmin = JOptionPane.showInputDialog("Enter the alarm Minutes that you would like to remove");
         try {
             int hour = Integer.parseInt(rhour);
             int min = Integer.parseInt(rmin);
-            boolean alarmRemoved = false;
+            List<Alarm> alarms = alarmClock.getAlarms();
             for (Alarm alarm : alarms) {
                 if (alarm.getHours() == hour && alarm.getMinutes() == min) {
                     alarms.remove(alarm);
@@ -350,22 +354,17 @@ public class AlarmClockGui extends JFrame {
             }
             if (alarmRemoved) {
                 JOptionPane.showMessageDialog(frame, "Alarm " + hour + ":" + min + " sucessfully removed");
-            } else {
-                JOptionPane.showMessageDialog(frame, "No matching alarm");
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(frame, "Invalid input");
+            JOptionPane.showMessageDialog(frame, "Invalid input, No matching alarm");
         }
     }
 
-    // MODIFIES: thiscode
+    // MODIFIES: this
     // EFFECTS: saves the set alarms to file
-    // used the jsonSerializationDemo (TellerApp) as a reference
+    // used the jsonSerializationDemo as a reference (same as Phase 2)
     private void savecurrentAlarm() {
         try {
-            if (alarmClock.getAlarms().isEmpty()) {
-                JOptionPane.showMessageDialog(frame, "No alarms to save.");
-            }
             jsonWriter.open();
             jsonWriter.write(alarmClock);
             jsonWriter.close();
@@ -373,14 +372,12 @@ public class AlarmClockGui extends JFrame {
             JOptionPane.showMessageDialog(frame, "Successfully Saved!");
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(frame, "Unable to write to file: " + JSON_STORE);
-        } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(frame, "Please load the file before saving it");
         }
     }
 
     // MODIFIES: this
     // EFFECTS: loads set alarms from file
-    // used the jsonSerializationDemo (TellerApp) as a reference
+    // used the jsonSerializationDemo as a reference (same as Phase 2)
     private void loadAlarmClock() {
         try {
             alarmClock = jsonReader.read();
@@ -392,7 +389,7 @@ public class AlarmClockGui extends JFrame {
 
     // EFFECTS: creates an alarm sound
     // Used the alarmSiren() method in AlarmSystem application as a reference
-    // Got help from
+    // Also got help from
     // https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
     private void alarmSound(String soundFilePath) {
         try {
@@ -410,6 +407,8 @@ public class AlarmClockGui extends JFrame {
 
     // EFFECTS: stops the alarm sound playing
     // Used the alarmSiren() method in AlarmSystem application as a reference
+    // Also got help from
+    // https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
     private void stopAlarm() {
         if (clip != null && clip.isRunning()) {
             clip.stop();
@@ -417,22 +416,15 @@ public class AlarmClockGui extends JFrame {
         }
     }
 
-    // EFFECTS: display thsi image when the alarm is rining
-    // Got help from https://www.codespeedy.com/how-to-add-an-image-in-jframe/
+    // EFFECTS: display this image when the alarm is ringing
+    // Got help from https://stackoverflow.com/questions/18027833/adding-image-to-jframe
     private void displayImage(String imagePath) {
-        BufferedImage img;
-        try {
-            img = ImageIO.read(new File(imagePath));
-            ImageIcon icon = new ImageIcon(img);
-            imagelabel = new JLabel(icon);
-            JOptionPane.showMessageDialog(frame, imagelabel);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ImageIcon icon = new ImageIcon(imagePath);
+        imagelabel = new JLabel(icon);
+        JOptionPane.showMessageDialog(frame, imagelabel);
     }
 
-    // EFFECTS: a riddle list with riddles for the user to solve and end their
+    // EFFECTS: a riddle list with riddles for the user to solve and end their alarm
     public void readyRiddles() {
         riddles.add(new Riddle(
                 "You measure my life in hours and I serve you by expiring.The wind is my enemy.",
