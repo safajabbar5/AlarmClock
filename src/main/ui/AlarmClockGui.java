@@ -47,6 +47,7 @@ public class AlarmClockGui extends JFrame {
     boolean correctAnswer = false;
     Boolean alarmRinging = false;
     private boolean setMoreAlarms;
+    private boolean isSaved;
 
     // sets up the frame and the title AlarmClock
     // https://docs.oracle.com/javase/tutorial/uiswing/components/frame.html
@@ -157,21 +158,22 @@ public class AlarmClockGui extends JFrame {
                 getAlarms();
             }
         });
+        continueActiontoButton();
     }
 
     // EFFECTS: continue the addActionButton method
     // MODIFIES: this
     private void continueActiontoButton() {
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-            }
-        });
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 removeAlarm();
+            }
+        });
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
             }
         });
     }
@@ -316,7 +318,7 @@ public class AlarmClockGui extends JFrame {
     private void removeAlarm() {
         List<Alarm> alarms = alarmClock.getAlarms();
         String rhour = JOptionPane.showInputDialog("Enter the alarm hour that you would like to remove");
-        String rmin = JOptionPane.showInputDialog("Enter the alarm Mintue that you would like to remove");
+        String rmin = JOptionPane.showInputDialog("Enter the alarm Minutes that you would like to remove");
         try {
             int hour = Integer.parseInt(rhour);
             int min = Integer.parseInt(rmin);
@@ -325,6 +327,9 @@ public class AlarmClockGui extends JFrame {
                 if (alarm.getHours() == hour && alarm.getMinutes() == min) {
                     alarms.remove(alarm);
                     alarmRemoved = true;
+                    if (isSaved) {
+                        savecurrentAlarm();
+                    }
                     break;
                 }
             }
@@ -338,7 +343,7 @@ public class AlarmClockGui extends JFrame {
         }
     }
 
-    // MODIFIES: this
+    // MODIFIES: thiscode
     // EFFECTS: saves the set alarms to file
     // used the jsonSerializationDemo (TellerApp) as a reference
     private void savecurrentAlarm() {
@@ -349,7 +354,8 @@ public class AlarmClockGui extends JFrame {
             jsonWriter.open();
             jsonWriter.write(alarmClock);
             jsonWriter.close();
-            JOptionPane.showMessageDialog(frame, "Successfully Saved Alarms");
+            isSaved = true;
+            JOptionPane.showMessageDialog(frame, "Success");
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(frame, "Unable to write to file: " + JSON_STORE);
         } catch (NullPointerException e) {
@@ -363,7 +369,7 @@ public class AlarmClockGui extends JFrame {
     private void loadAlarmClock() {
         try {
             alarmClock = jsonReader.read();
-            JOptionPane.showMessageDialog(frame, "Successfully Loaded Alarms clock");
+            JOptionPane.showMessageDialog(frame, "Success");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(frame, "Unable to load alarm clock from " + JSON_STORE);
         }
@@ -413,9 +419,6 @@ public class AlarmClockGui extends JFrame {
 
     // EFFECTS: a riddle list with riddles for the user to solve and end their
     public void readyRiddles() {
-        riddles.add(new Riddle(
-                "I speak without a mouth and hear without ears.I have no body, but I come alive with wind. What am I?",
-                "echo"));
         riddles.add(new Riddle(
                 "You measure my life in hours and I serve you by expiring.The wind is my enemy.",
                 "candle"));
