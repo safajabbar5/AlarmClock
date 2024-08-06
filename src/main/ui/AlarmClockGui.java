@@ -32,9 +32,10 @@ public class AlarmClockGui extends JFrame {
     private JLabel imagelabel;
     private JButton alarmButton;
     private JButton loadButton;
-    private JButton saveButton;
+    private JButton viewButton;
     private JButton exitButton;
     private JButton removeButton;
+    private JButton saveButton;
     private Clip clip;
 
     private Alarm currentalarm;
@@ -44,10 +45,11 @@ public class AlarmClockGui extends JFrame {
     private JsonReader jsonReader;
     private static final String JSON_STORE = "./data/alarmClock.json";
 
-    boolean correctAnswer = false;
-    Boolean alarmRinging = false;
+    private boolean correctAnswer = false;
+    private Boolean alarmRinging = false;
     private boolean setMoreAlarms;
     private boolean isSaved;
+    
 
     // sets up the frame and the title AlarmClock
     // https://docs.oracle.com/javase/tutorial/uiswing/components/frame.html
@@ -112,22 +114,27 @@ public class AlarmClockGui extends JFrame {
         Box buttonBox = new Box(BoxLayout.Y_AXIS);
 
         loadButton = new JButton("Load Alarm");
-        saveButton = new JButton("View Current Alarms");
+        viewButton = new JButton("View Current Alarms");
         exitButton = new JButton("Exit Application");
         alarmButton = new JButton("Set Alarm!!");
         removeButton = new JButton("Remove Alarms");
+        saveButton = new JButton("Save Alarms");
+        
 
-        loadButton.setFont(new Font("Times New Roman", Font.BOLD, 20));
-        saveButton.setFont(new Font("Times New Roman", Font.BOLD, 20));
-        exitButton.setFont(new Font("Times New Roman", Font.BOLD, 20));
-        alarmButton.setFont(new Font("Times New Roman", Font.BOLD, 20));
-        removeButton.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        loadButton.setFont(new Font("Times New Roman", Font.BOLD, 16));
+        viewButton.setFont(new Font("Times New Roman", Font.BOLD, 16));
+        exitButton.setFont(new Font("Times New Roman", Font.BOLD, 16));
+        alarmButton.setFont(new Font("Times New Roman", Font.BOLD,16));
+        removeButton.setFont(new Font("Times New Roman", Font.BOLD,16));
+        saveButton.setFont(new Font("Times New Roman", Font.BOLD, 16));
 
         buttoPanel.add(loadButton);
-        buttoPanel.add(alarmButton);
         buttoPanel.add(saveButton);
+        buttoPanel.add(alarmButton);
+        buttoPanel.add(viewButton);
         buttoPanel.add(exitButton);
         buttoPanel.add(removeButton);
+        
 
         buttoPanel.add(Box.createHorizontalStrut(15));
 
@@ -152,7 +159,7 @@ public class AlarmClockGui extends JFrame {
                 setAlarmTime();
             }
         });
-        saveButton.addActionListener(new ActionListener() {
+        viewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getAlarms();
@@ -170,6 +177,14 @@ public class AlarmClockGui extends JFrame {
                 removeAlarm();
             }
         });
+
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                savecurrentAlarm();
+            }
+        });
+
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -355,7 +370,7 @@ public class AlarmClockGui extends JFrame {
             jsonWriter.write(alarmClock);
             jsonWriter.close();
             isSaved = true;
-            JOptionPane.showMessageDialog(frame, "Success");
+            JOptionPane.showMessageDialog(frame, "Successfully Saved!");
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(frame, "Unable to write to file: " + JSON_STORE);
         } catch (NullPointerException e) {
@@ -369,7 +384,7 @@ public class AlarmClockGui extends JFrame {
     private void loadAlarmClock() {
         try {
             alarmClock = jsonReader.read();
-            JOptionPane.showMessageDialog(frame, "Success");
+            JOptionPane.showMessageDialog(frame, "Successfully Loaded!");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(frame, "Unable to load alarm clock from " + JSON_STORE);
         }
