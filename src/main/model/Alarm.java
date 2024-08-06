@@ -2,7 +2,7 @@ package model;
 
 import org.json.JSONObject;
 
-import model.persistence.Writable;
+import model.Persistence.Writable;
 
 // A class representing a Alarm with a set time in hours and mintues
 public class Alarm implements Writable {

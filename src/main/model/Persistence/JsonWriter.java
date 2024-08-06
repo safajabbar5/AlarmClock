@@ -1,4 +1,4 @@
-package model.persistence;
+package model.Persistence;
 
 import model.Alarmclock;
 import org.json.JSONObject;

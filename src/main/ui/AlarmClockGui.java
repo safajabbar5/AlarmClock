@@ -3,8 +3,8 @@ package ui;
 import model.Alarmclock;
 import model.Alarm;
 import model.Riddle;
-import model.persistence.JsonReader;
-import model.persistence.JsonWriter;
+import model.Persistence.JsonReader;
+import model.Persistence.JsonWriter;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;

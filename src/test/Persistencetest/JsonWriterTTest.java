@@ -1,8 +1,8 @@
 package persistencetest;
 
 import model.Alarmclock;
-import model.persistence.JsonReader;
-import model.persistence.JsonWriter;
+import model.Persistence.JsonReader;
+import model.Persistence.JsonWriter;
 import model.Alarm;
 import org.junit.jupiter.api.Test;
 
@@ -68,3 +68,5 @@ public class JsonWriterTTest extends JsonTest {
     }
 
 }
+
+

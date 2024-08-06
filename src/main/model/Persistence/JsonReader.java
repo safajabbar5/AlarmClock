@@ -1,4 +1,4 @@
-package model.persistence;
+package model.Persistence;
 
 import model.Alarm;
 import model.Alarmclock;
