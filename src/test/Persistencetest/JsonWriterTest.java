@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class JsonWriterTTest extends JsonTest {
+public class JsonWriterTest extends JsonTest {
     
 
     @Test
@@ -68,3 +68,5 @@ public class JsonWriterTTest extends JsonTest {
     }
 
 }
+
+
