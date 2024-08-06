@@ -1,11 +1,10 @@
 package ui;
 
 import model.Alarmclock;
+import model.JsonReader;
+import model.JsonWriter;
 import model.Alarm;
 import model.Riddle;
-import model.persistence.JsonReader;
-import model.persistence.JsonWriter;
-
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;

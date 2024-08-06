@@ -1,11 +1,8 @@
-package persistencetest;
-
 import model.Alarmclock;
-import model.persistence.JsonReader;
-import model.persistence.JsonWriter;
+import model.JsonReader;
+import model.JsonWriter;
 import model.Alarm;
 import org.junit.jupiter.api.Test;
-
 
 import java.io.IOException;
 import java.util.List;

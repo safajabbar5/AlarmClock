@@ -1,7 +1,5 @@
-package persistencetest;
-
 import model.Alarmclock;
-import model.persistence.JsonReader;
+import model.JsonReader;
 import model.Alarm;
 import org.junit.jupiter.api.Test;
 

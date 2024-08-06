@@ -1,6 +1,3 @@
-package persistencetest;
-
-
 import model.Alarm;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

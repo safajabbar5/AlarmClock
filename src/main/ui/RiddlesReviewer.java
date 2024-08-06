@@ -1,9 +1,9 @@
 package ui;
 
 import model.Riddle;
-import model.persistence.JsonReader;
-import model.persistence.JsonWriter;
 import model.Alarmclock;
+import model.JsonReader;
+import model.JsonWriter;
 import model.Alarm;
 
 import java.io.FileNotFoundException;

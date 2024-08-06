@@ -8,8 +8,6 @@ import javax.swing.JList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import model.persistence.Writable;
-
 import java.time.LocalTime;
 
 // A class representing an alarm clock that shows the list of confirmed alarms, and compares alarm with local time  

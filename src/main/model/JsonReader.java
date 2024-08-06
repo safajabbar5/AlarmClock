@@ -1,7 +1,4 @@
-package model.persistence;
-
-import model.Alarm;
-import model.Alarmclock;
+package model;
 
 import java.io.File;
 import java.io.IOException;
