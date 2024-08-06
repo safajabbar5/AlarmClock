@@ -8,7 +8,7 @@ import javax.swing.JList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import model.Persistence.Writable;
+import model.persistence.Writable;
 
 import java.time.LocalTime;
 

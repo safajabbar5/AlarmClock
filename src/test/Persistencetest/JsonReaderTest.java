@@ -1,7 +1,7 @@
 package persistencetest;
 
 import model.Alarmclock;
-import model.Persistence.JsonReader;
+import model.persistence.JsonReader;
 import model.Alarm;
 import org.junit.jupiter.api.Test;
 
@@ -58,4 +58,5 @@ public class JsonReaderTest extends JsonTest {
         assertEquals(2, alarms.size()); // since two alarms were added
     }
 }
+
 
