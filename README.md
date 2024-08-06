@@ -28,4 +28,10 @@ As a user, when I start the application, I want to be given the option to load m
 As a user, I want to see a visual representation (like an image or graph) related to my alarms or riddles, enhancing my interaction with the application.
 
 As a user, I want to be able to filter or search through my list of set alarms, so I can easily find and manage them.
+
+As a user, I want to click a button to set my alarm, and then after I am done I want to be able to view the list of my alarms.
+
+As a user, I want to be able to click a button to remove alarms from my set list of alarms.
+
+As a user, I want to be able to click on a button to load my previous saved alarms and then be given an option to save my alarms.
   

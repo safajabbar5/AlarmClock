@@ -192,6 +192,7 @@ public class RiddlesReviewer {
                     String answer = scanner.nextLine();
                     if (riddle.checkRiddleAnswer(answer)) {
                         System.out.println("Correct! Alarm stopped.");
+            
                         correctAnswer = true;
                         return true;
                     } else {

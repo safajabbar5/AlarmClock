@@ -41,13 +41,7 @@ public class Alarmclock implements Writable {
         alarms.add(alarm);
     }
 
-    // EFFECTS: if there is an alarm set is the same time as the local time, then
-    // alarm should ring
-    // MODIFIES: this
-    // public Boolean alarmIsPlaying(Alarm alarm) {
-    //     return (alarm.getHours() == currentLocalhour.getHour() && alarm.getMinutes() == currentLocalmin.getMinute());
-    // }
-      
+
 
     // EFFECTS: returns the current alarm that is set
     public Alarm getRecentAlarm() {
@@ -57,6 +51,10 @@ public class Alarmclock implements Writable {
     // EFFECTS: returns the current alarm list that is set
     public List<Alarm> getAlarms() {
         return alarms;
+    }
+
+    public void removeAlarm(Alarm alarm) {
+        alarms.remove(alarm);
     }
 
  

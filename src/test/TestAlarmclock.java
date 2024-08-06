@@ -59,13 +59,32 @@ public class TestAlarmclock {
     }
 
     @Test
+    void testremoveAlarm() {
+        testAlarmClock.addAlarm(testa1);
+        testAlarmClock.addAlarm(testa2);
+        alarmList = testAlarmClock.getAlarms();
+        assertEquals(2, alarmList.size());
+        testAlarmClock.removeAlarm(testa1);
+        assertEquals(1, alarmList.size());
+        testAlarmClock.removeAlarm(testa1);
+        assertEquals(1, alarmList.size());
+        testAlarmClock.removeAlarm(testa2);
+        assertTrue(alarmList.isEmpty());
+
+
+
+        
+
+    }
+
+    @Test
     void testalarmIsPlaying() {
         LocalTime now = LocalTime.now();
         Alarm currenttime = new Alarm(currentLocalhour.getHour(), currentLocalmin.getMinute());
         alarmList.add(currenttime);
         assertFalse(currenttime.equals(testa1));
         assertFalse(currenttime.equals(testa1));
-       // assertTrue(testAlarmClock.alarmIsPlaying(currenttime));
+     
 
     }
 
