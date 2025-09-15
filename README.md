@@ -23,10 +23,11 @@ As a user, when I am done setting my alarms, I want to be reminded to save my se
 
 As a user, when I start the application, I want to be given the option to load my saved alarms from file.
 
-## Instructions for Grader
+## Instructions for User
 
 - You can generate the first action related to the user story by clicking on the set Alarms button.
 - You can generate the second action related to the user story by clicking on the remove Alarms button.
 - You can locate my visual component after the alarm rings.
 - You can save the state of my application by clicking on the save alarm button or after setting ur alarms.
 - You can reload the state of my application by clicking on the load alarms button.
+
